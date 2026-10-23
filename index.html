@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#302a2d">
+<title>富家大小姐的危险婚姻</title>
+<style>
+:root{--ink:#302a2d;--paper:#fffdfb;--bg:#f5f0ec;--line:#eadfd9;--muted:#938781;--accent:#987569}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#302a2a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,textarea{font:inherit}button{cursor:pointer;touch-action:manipulation}
+.wrap{max-width:560px;margin:0 auto;min-height:100dvh;background:var(--paper);box-shadow:0 0 28px #38231b0b;display:flex;flex-direction:column}
+.top{background:var(--ink);color:white;padding:calc(18px + env(safe-area-inset-top)) 18px 17px}
+.eyebrow{display:flex;justify-content:space-between;gap:10px;color:#e7dcd7;font-size:11px}
+h1{font-size:24px;letter-spacing:-.04em;margin:13px 0 4px;line-height:1.25}.subtitle{font-size:12px;color:#d5c5bd}
+.pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.pill{border-radius:999px;background:#4b4040;color:#f4e7df;padding:5px 10px;font-size:11px}
+nav{display:flex;gap:5px;padding:10px;background:#f7f1ed;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3}
+nav button{flex:1;border:0;background:transparent;border-radius:10px;padding:10px 3px;font-size:12px;color:#766b65}
+nav button.active{background:white;color:#352c2c;box-shadow:0 2px 8px #0000000a;font-weight:700}
+main{padding:16px;flex:1}.scene{background:linear-gradient(135deg,#f6ebe4,#f5f1ed);border-radius:17px;padding:16px;margin-bottom:15px}
+.tag{font-size:10px;color:#8e7063;letter-spacing:.12em}.scene h2{font-size:18px;margin:9px 0 6px}.scene p{font-size:13px;line-height:1.85;margin:0;color:#5e514b}
+.kr{border-top:1px solid #e5d7ce;margin-top:12px;padding-top:10px;font-size:13px;font-weight:650;line-height:1.6}.zh{font-size:12px!important;color:#856e62!important;margin-top:4px!important}
+.choice{display:block;width:100%;text-align:left;border:1px solid #e9dfd9;background:white;border-radius:13px;padding:13px;margin:8px 0;color:#342b2a;font-size:13px;line-height:1.6}
+.choice b{display:block;font-size:13px;margin-bottom:3px}.choice span{color:#877a74;font-size:12px}.choice:active,.smallbtn:active{transform:scale(.99);background:#fff8f4}
+.muted{color:var(--muted)}.line{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid #f0e9e4}
+.avatar{width:39px;height:39px;flex:0 0 39px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#e8d8d0;font-weight:800;color:#634c43}
+.bar{height:5px;background:#eee5df;border-radius:8px;overflow:hidden;margin-top:6px}.fill{height:100%;background:var(--accent);border-radius:8px}
+.bubble{max-width:88%;padding:11px 13px;border-radius:14px;background:#f2eeeb;margin:9px 0;font-size:13px;line-height:1.65;white-space:pre-line;overflow-wrap:anywhere}
+.bubble.me{background:#e6d8ce;margin-left:auto}.bubble small{display:block;color:#8d7c74;margin-top:5px;font-size:11px}.translation{color:#8b7b72;font-size:12px;margin-top:4px}
+.contacts{display:flex;gap:6px;flex-wrap:wrap;margin:15px 0 8px}.smallbtn{border:1px solid #e5d8d0;background:white;border-radius:10px;padding:9px 10px;font-size:11px;color:#51433d}
+.notice{font-size:12px;color:#806356;background:#f8eee7;padding:10px;border-radius:10px;margin:8px 0;line-height:1.7}
+.log{font-size:12px;line-height:1.8;padding:10px 0;border-bottom:1px solid #f0e9e4}.foot{border-top:1px solid #eee5df;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:#fffdfb;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;color:#938781}
+textarea{width:100%;min-height:190px;border:1px solid #e5d8d0;border-radius:12px;padding:10px;font-size:11px;line-height:1.6;background:white}
+@media(min-width:650px){body{padding:18px 0}.wrap{min-height:calc(100dvh - 36px);border:1px solid var(--line);border-radius:25px;overflow:hidden}}
+</style>
+</head>
+<body>
+<div class="wrap" id="game">
+<header class="top">
+ <div class="eyebrow"><span>✦ INTERACTIVE STORY</span><span id="day-label">婚后 · 第 31 天</span></div>
+ <h1>富家大小姐的危险婚姻</h1><div class="subtitle">THE BOYZ 平行世界 · 多线悬疑恋爱</div>
+ <div class="pills"><span class="pill">已婚：李贤在</span><span class="pill" id="chapter-tag">CH. 01</span><span class="pill" id="clock">08:42</span></div>
+</header>
+<nav>
+ <button class="active" data-tab="story">剧情</button><button data-tab="chat">手机</button><button data-tab="people">人物</button><button data-tab="save">存档</button>
+</nav>
+<main id="content"></main>
+<footer class="foot"><span id="status-text">你的选择将改变关系与后续事件</span><button class="smallbtn" id="restart">重新开始</button></footer>
+</div>
+<script>
+(() => {
+const $=s=>document.querySelector(s);
+const peopleBase=[
+{id:'hyunjae',name:'李贤在',kr:'현재',role:'新婚丈夫',avatar:'贤',color:'#e8d8d0',desc:'最初带着利益目的进入婚姻。最近，他开始在意一些原本不会放在心上的小事。',v:24},
+{id:'juyeon',name:'李柱延',kr:'주연',role:'加油站同事',avatar:'柱',color:'#dce1df',desc:'曾经家境优越，如今正在重新建立自己的生活。李贤在起初并不怎么看得上他。',v:8},
+{id:'youngjae',name:'孙英宰',kr:'영재',role:'丈夫的远房表弟',avatar:'英',color:'#eadfc8',desc:'被李贤在带回家的远房表弟。孩子气、分享欲强，常常不懂什么时候该保持距离。',v:12},
+{id:'younghoon',name:'金泳勋',kr:'영훈',role:'大学学长 / 律师',avatar:'勋',color:'#e2dce9',desc:'礼貌、细腻、擅长谈判。他知道的事情，可能比他说出来的更多。',v:10},
+{id:'sunwoo',name:'金善旴',kr:'선우',role:'贝果店相识的人',avatar:'善',color:'#f0d9dc',desc:'曾在贝果店与你有过一次荒诞的相遇。直球、自信，而且不太擅长隐藏兴趣。',v:10}
+];
+const scenes=[
+{title:'婚后第 31 天 · 早晨',place:'夫妻住所 · 主卧外',text:'清晨的光落在客厅窗帘边。李贤在已经换好衣服，桌上放着两杯咖啡和一份简单的早餐。他看了一眼手机，随后把其中一杯咖啡放到桌边。',kr:'일어났어? 커피 식기 전에 마셔.',zh:'醒了？咖啡趁热喝。',speaker:'hyunjae',choices:[
+['问他今天的工作安排','从普通夫妻的日常开始。',1,{trust:2},'hyunjae','你询问了李贤在今天的工作安排。'],
+['留意他刚刚扣下的手机','不打草惊蛇，先观察细节。',2,{danger:3},null,'你留意到李贤在刚刚把手机屏幕扣在桌面上。'],
+['查看自己的手机消息','几条新消息正在等待查看。',3,{},'sunwoo','你打开了手机，查看新收到的消息。']]},
+{title:'早餐桌上的日常',place:'夫妻住所 · 餐厅',text:'李贤在把杯子放下，语气平常地说，今天加油站可能会比平时忙一点。他提到李柱延时，只说了一句“那家伙最近总是自己做主”，听起来不太欣赏对方。',kr:'주연이 걔는 꼭 혼자서 다 하려고 하더라.',zh:'柱延那家伙，总是什么都想自己做。',speaker:'hyunjae',choices:[
+['继续聊加油站的事','了解两人的工作关系。',4,{trust:1},null,'你继续了解了加油站的工作安排。'],
+['问起李柱延最近的情况','看看李贤在如何评价他。',5,{danger:1},null,'李贤在谈起李柱延时，语气里带着明显的不以为意。'],
+['结束这段谈话，查看手机','先把注意力转向其他人。',3,{},'younghoon','早餐谈话暂时结束。']]},
+{title:'一闪而过的屏幕',place:'夫妻住所 · 餐厅',text:'屏幕亮起的瞬间，李贤在迅速把手机收了起来。你没有看到完整内容，只看到一条被截断的通知。现在还无法判断它意味着什么。',kr:'별거 아니야. 일 얘기야.',zh:'没什么，工作上的事。',speaker:'hyunjae',choices:[
+['不追问，记下这个细节','没有证据，不急着下结论。',6,{danger:3},null,'已记录：李贤在迅速收起手机。该细节尚不能证明任何阴谋。'],
+['直接询问他在隐瞒什么','正面试探他的反应。',7,{trust:-2,danger:2},null,'你选择直接询问。李贤在没有立即给出详细解释。'],
+['暂时放过这件事','把注意力放回今天的安排。',1,{independence:1},null,'你暂时没有继续追问。']]},
+{title:'手机里有新消息',place:'手机 · 未读消息',text:'手机上有来自不同联系人的新消息。每个人都在自己的生活里，而你还没有决定今天要把时间花在哪里。',kr:'누나, 어제 그 베이글집 또 갔어요?',zh:'怒那，你昨天又去那家贝果店了吗？',speaker:'sunwoo',choices:[
+['打开金善旴的聊天','查看他为什么突然找你。',8,{},'sunwoo','你打开了金善旴的聊天窗口。'],
+['查看金泳勋发来的消息','学长似乎有一件正事要说。',9,{},'younghoon','你查看了金泳勋发来的消息。'],
+['查看孙英宰的消息','他连续发来了好几条。',10,{},'youngjae','你打开了孙英宰的聊天窗口。']]},
+{title:'加油站的工作安排',place:'夫妻住所 · 餐厅',text:'李贤在简单说明了今天的排班。他说李柱延做事还算认真，但有时候不懂得看情况。谈起这个同事时，他没有表现出任何情敌式的警觉，只是不太欣赏对方的性格。',kr:'일은 잘해. 근데 좀 피곤한 스타일이지.',zh:'工作倒是做得不错，就是有点让人累。',speaker:'hyunjae',choices:[
+['结束早餐，进入手机界面','今天还有其他人等着回复。',3,{},'sunwoo','你结束了早餐时的谈话。'],
+['问李贤在今天几点回来','安排今天的时间。',11,{trust:1},null,'你询问了李贤在今天的行程。']]},
+{title:'他不怎么看得上李柱延',place:'夫妻住所 · 餐厅',text:'李贤在耸了耸肩，似乎不觉得李柱延有什么值得特别关注的地方。他很快把话题带回今天的工作安排。此时，他还没有意识到李柱延可能对你有特别的感情。',kr:'걔가 뭐. 그냥 같이 일하는 사람이지.',zh:'他？就是一起工作的同事而已。',speaker:'hyunjae',choices:[
+['不再追问','这段关系暂时没有更多信息。',3,{},null,'关于李柱延的谈话暂时告一段落。'],
+['记住他的评价','以后再观察两人的互动。',6,{danger:1},null,'已记录李贤在目前对李柱延的评价。']]},
+{title:'谨慎观察',place:'夫妻住所 · 客厅',text:'你暂时没有追问。李贤在拿起自己的外套，提醒今天可能会晚些回家。桌上的手机再次亮了一下，但他这次没有立刻查看。',kr:'오늘 좀 늦을 수도 있어. 먼저 자도 돼.',zh:'我今天可能会晚一点，你可以先睡。',speaker:'hyunjae',choices:[
+['查看手机里的其他消息','转向自己的日常与社交关系。',3,{},'younghoon','你决定先处理其他消息。'],
+['询问他是否需要帮忙','维持日常沟通。',1,{trust:2},null,'你选择继续与李贤在保持沟通。']]},
+{title:'正面试探',place:'夫妻住所 · 餐厅',text:'李贤在停顿了片刻。他的表情没有明显变化，但回答比刚才谨慎了些。他没有承认隐瞒什么，只表示工作上的事情还没处理完。一次试探不能证明他在说谎。',kr:'뭘 숨겨. 아직 정리 안 된 일이 있어서 그래.',zh:'我隐瞒什么了？只是还有些事没处理完。',speaker:'hyunjae',choices:[
+['暂时接受这个回答','保留疑问，继续观察。',6,{trust:1},null,'李贤在给出了一个解释，但尚未得到独立验证。'],
+['明确表示自己会留意','不急着争论，把判断留给后续证据。',3,{danger:2,independence:1},null,'你决定继续观察他的行为。']]},
+{title:'金善旴的直球消息',place:'KakaoTalk · 金善旴',text:'金善旴发来一张贝果的照片，紧接着又发了一条消息。他似乎已经把那次荒诞的初遇当成了一个很好用的聊天开场。',kr:'누나, 이거 보면 저 생각날 것 같은데요ㅋㅋ',zh:'怒那，看到这个应该会想起我吧ㅋㅋ',speaker:'sunwoo',choices:[
+['问他为什么这么自信','接住他的玩笑，看看他怎么回应。',12,{sunwoo:3},'sunwoo','你与金善旴继续聊了起来。'],
+['问他最近在忙什么','把话题转向日常。',13,{sunwoo:1},'sunwoo','你开始了解金善旴最近的生活。'],
+['暂时不回复','消息留在未读状态。',14,{},null,'金善旴的消息暂时没有得到回复。']]},
+{title:'金泳勋的正事',place:'KakaoTalk · 金泳勋',text:'金泳勋的消息措辞一如既往地礼貌。他提到有一份文件可能与你家里的某项安排有关，问你是否方便找时间聊聊。他没有直接解释文件的内容。',kr:'시간 괜찮을 때 잠깐 얘기할 수 있을까?',zh:'你方便的时候，可以抽空聊一下吗？',speaker:'younghoon',choices:[
+['询问文件具体是什么','先确认信息，再决定是否见面。',15,{younghoon:1},'younghoon','你询问了金泳勋有关文件的具体情况。'],
+['约一个合适的时间见面','面对面沟通可能更清楚。',16,{younghoon:2},'younghoon','你与金泳勋开始商量见面时间。'],
+['暂时搁置','先处理眼前的事。',14,{},null,'你暂时没有答应金泳勋的邀约。']]},
+{title:'孙英宰的连续消息',place:'KakaoTalk · 孙英宰',text:'孙英宰一口气发来了几条消息，先问家里有没有零食，又说自己发现了一家新店。最后一条甚至没有好好收尾，像是想到什么就立刻发了过来。',kr:'형수님ㅋㅋㅋ 집에 과자 있어요?\\n아 그리고 저 진짜 할 말 있어요',zh:'嫂子ㅋㅋㅋ 家里有零食吗？\\n啊对了，我真的有话要说。',speaker:'youngjae',choices:[
+['问他有什么事','让他把话说清楚。',17,{youngjae:2},'youngjae','你让孙英宰说清楚他想讲的事。'],
+['先回答零食的问题','从最简单的日常问题开始。',18,{youngjae:1},'youngjae','你先回应了孙英宰关于零食的问题。'],
+['提醒他不要连续轰炸消息','建立清楚的沟通边界。',19,{independence:2},'youngjae','你选择向孙英宰表达沟通边界。']]},
+{title:'今天几点回来？',place:'夫妻住所 · 门口',text:'李贤在把钥匙放进外套口袋。他看了眼时间，说工作结束后会尽量早点回来，但没有保证具体几点。',kr:'끝나는 대로 연락할게.',zh:'结束了我就联系你。',speaker:'hyunjae',choices:[
+['去处理自己的安排','不把整天的时间都留给丈夫。',3,{independence:2},'sunwoo','你开始安排自己的时间。'],
+['询问他最近是不是压力很大','尝试了解他的近况。',1,{trust:2},null,'你继续与李贤在沟通。']]},
+{title:'你为什么这么自信？',place:'KakaoTalk · 金善旴',text:'金善旴几乎立刻回复。他像是早就准备好了下一句，完全不介意把自己的兴趣表现得明明白白。',kr:'제가 좀 매력 있잖아요ㅋㅋ 누나도 알면서.',zh:'因为我很有魅力啊ㅋㅋ 怒那明明也知道。',speaker:'sunwoo',choices:[
+['继续和他斗嘴','让这段对话自然发展。',20,{sunwoo:3},'sunwoo','你们的聊天变得更轻松。'],
+['问他是否想约你出去','把他的暗示说得更明白。',21,{sunwoo:4},'sunwoo','你把话题引向了约会。'],
+['结束聊天，回到自己的安排','暂时不继续发展。',14,{},null,'聊天暂时停在这里。']]},
+{title:'普通的近况交流',place:'KakaoTalk · 金善旴',text:'金善旴分享了最近试吃的几种口味，还吐槽其中一种搭配。他没有急着谈感情，而是继续找话题和你聊天。',kr:'오늘 먹은 것 중에 이게 제일 맛있었어요.',zh:'我今天吃过的东西里，这个最好吃。',speaker:'sunwoo',choices:[
+['继续聊吃的','慢慢熟悉彼此的日常。',20,{sunwoo:2},'sunwoo','你们继续分享日常。'],
+['问他最近有没有空','看看是否能约个时间见面。',21,{sunwoo:2},'sunwoo','你开始询问金善旴的时间安排。']]},
+{title:'暂时没有回复',place:'手机 · 通知中心',text:'消息仍然留在屏幕上。没有新的回复，也没有发生什么必须立刻处理的事。你可以继续查看其他联系人，或者把手机放下。',speaker:'',choices:[
+['查看其他人的聊天','切换联系人。',3,{},'younghoon','你切换到其他联系人。'],
+['回到剧情现场','继续今天的日常安排。',1,{},null,'你回到当前的生活安排。']]},
+{title:'文件究竟是什么？',place:'KakaoTalk · 金泳勋',text:'金泳勋回复说，目前不适合直接通过消息讨论。他的语气没有催促，但也没有把话说完。他给出了一个见面地点和大致时间。',kr:'메시지로 설명하기엔 조금 복잡해. 만나서 얘기하자.',zh:'用消息解释有点复杂。见面再说吧。',speaker:'younghoon',choices:[
+['要求先知道大致主题','你有权在见面前确认谈话内容。',22,{younghoon:1,independence:1},'younghoon','你要求金泳勋先说明谈话主题。'],
+['同意稍后见面','保留判断，先听听他的说法。',23,{younghoon:2},'younghoon','你暂时同意见面。']]},
+{title:'约一个时间',place:'KakaoTalk · 金泳勋',text:'金泳勋提出在白天于公共场所见面。他没有坚持让你立刻答应，而是等你决定是否接受。',kr:'편한 시간에 맞출게. 네가 정해.',zh:'我可以配合你的时间。你来定吧。',speaker:'younghoon',choices:[
+['选择白天的公共场所','保持会面安排清晰、可控。',23,{younghoon:2,independence:1},null,'你倾向于选择白天的公共场所见面。'],
+['先把会面放一放','现在还不必决定。',14,{},null,'你暂时没有确认会面。']]},
+{title:'孙英宰到底想说什么？',place:'KakaoTalk · 孙英宰',text:'孙英宰发来一条语音，紧接着又补充说这件事“没有很严重啦”，但听起来又像是希望有人认真听他说完。',kr:'아니, 별건 아닌데요. 그래도 형수님한테 먼저 말하고 싶었어요.',zh:'不是，没什么大事。不过我还是想先告诉嫂子。',speaker:'youngjae',choices:[
+['让他慢慢说','给他机会解释清楚。',24,{youngjae:2},'youngjae','你让孙英宰慢慢解释。'],
+['问他是否和李贤在有关','确认这件事是否涉及丈夫。',25,{danger:1},'youngjae','你询问了事情是否与李贤在有关。']]},
+{title:'先解决零食问题',place:'KakaoTalk · 孙英宰',text:'孙英宰很快回复，语气像是松了口气。他开始认真讨论家里的零食库存，随后又顺手发来一张拍得歪歪扭扭的照片。',kr:'역시 형수님 최고ㅋㅋㅋ',zh:'果然嫂子最好了ㅋㅋㅋ',speaker:'youngjae',choices:[
+['继续日常聊天','让家庭关系自然发展。',24,{youngjae:1},'youngjae','你们继续聊起日常。'],
+['提醒他要学会自己安排生活','温和但清晰地建立界限。',19,{independence:2},'youngjae','你提醒孙英宰逐渐学会独立。']]},
+{title:'把话说清楚',place:'KakaoTalk · 孙英宰',text:'孙英宰的消息停顿了一会儿。他似乎正在组织语言，接着才发来一条相对认真的回复。',kr:'알겠어요. 다음부턴 먼저 물어볼게요.',zh:'知道了。下次我会先问过你。',speaker:'youngjae',choices:[
+['继续聊下去','观察他是否真的会改变。',24,{youngjae:1},'youngjae','孙英宰表示会注意边界。'],
+['结束聊天','让他自己消化这次沟通。',14,{},null,'聊天暂时结束。']]},
+{title:'一场轻松的斗嘴',place:'KakaoTalk · 金善旴',text:'金善旴发来一条带着笑意的消息，像是在认真约你，又故意留了点玩笑的余地。',kr:'그럼 저랑 베이글 먹으러 갈래요? 이번엔 안 막힐게요ㅋㅋ',zh:'那要不要和我去吃贝果？这次我保证不会噎住ㅋㅋ',speaker:'sunwoo',choices:[
+['问他准备去哪一家','把玩笑变成实际安排。',26,{sunwoo:4},'sunwoo','你开始和金善旴讨论见面安排。'],
+['继续开玩笑','先享受这段轻松的聊天。',27,{sunwoo:2},'sunwoo','你们继续斗嘴。'],
+['暂时不做约会安排','不急着把关系推进。',14,{},null,'约会话题暂时搁置。']]},
+{title:'关于约会的试探',place:'KakaoTalk · 金善旴',text:'金善旴的语气稍微认真了一点。他没有要求你立刻给出答案，只是明确表示，自己并不完全是在开玩笑。',kr:'장난도 치지만, 진짜 만나고 싶은 것도 맞아요.',zh:'我会开玩笑，但我也是真的想和你见面。',speaker:'sunwoo',choices:[
+['让他提出具体计划','看他如何安排，而不是只听他说。',26,{sunwoo:3},'sunwoo','你让金善旴提出具体见面计划。'],
+['先保持现在的距离','暂时不对这段关系作出承诺。',14,{},null,'你选择暂时保持距离。']]},
+{title:'关于家里的事',place:'KakaoTalk · 金泳勋',text:'金泳勋没有立即透露文件内容，只表示这件事可能涉及家族过去的一项安排。他强调，在没有确认事实之前，不应该贸然下结论。',kr:'확인하기 전엔 단정하지 않는 게 좋아.',zh:'在确认之前，最好不要直接下结论。',speaker:'younghoon',choices:[
+['请他说明自己掌握的信息来源','先核实来源，再决定下一步。',23,{younghoon:1,danger:1},'younghoon','你开始核实金泳勋的信息来源。'],
+['暂时结束谈话','等准备好再继续。',14,{},null,'你暂时没有继续讨论。']]},
+{title:'白天的会面安排',place:'手机 · 日程',text:'会面尚未真正发生。金泳勋只提出了时间和地点，具体谈话内容仍然未知。你的日程里多了一件待决定的事。',kr:'그때 자세히 설명할게.',zh:'到时候我会详细解释。',speaker:'younghoon',choices:[
+['把会面加入待办事项','保留这条线索。',28,{independence:1},null,'已记录：待与金泳勋会面，主题尚未证实。'],
+['暂时不安排','先处理其他事情。',14,{},null,'会面尚未确认。']]},
+{title:'孙英宰的认真时刻',place:'KakaoTalk · 孙英宰',text:'孙英宰终于把事情说得更清楚了。他不再连续发消息，而是等着对话另一端的回应。',kr:'저도 이제 좀 제대로 해볼게요.',zh:'我以后也会认真一点的。',speaker:'youngjae',choices:[
+['鼓励他自己处理问题','支持他成长，但不替他决定。',28,{youngjae:3,independence:1},null,'孙英宰开始尝试自己承担责任。'],
+['提醒他有事可以先讲清楚','建立更好的沟通方式。',28,{youngjae:2},null,'你们就沟通方式达成了初步共识。']]},
+{title:'今日记录',place:'手机 · 日程与线索',text:'早晨的几段对话暂时告一段落。李贤在仍然按自己的日程工作，其他人也各自忙碌。今天的选择留下了不同的关系变化与待确认事项。',kr:'오늘은 여기까지.',zh:'今天先到这里。',speaker:'',choices:[
+['回到剧情继续探索','继续查看手机或与人物互动。',3,{},null,'你回到了可继续探索的日常阶段。'],
+['查看人物关系','检查当前关系状态。',0,{},null,''],
+['查看存档与事件记录','整理目前发生的事情。',0,{},null,'']]}
+];
+const defaultChats={
+hyunjae:[['李贤在','일어났어? 커피 식기 전에 마셔.','醒了？咖啡趁热喝。','08:42'],['李贤在','오늘 좀 늦을 수도 있어. 먼저 자도 돼.','我今天可能会晚一点，你可以先睡。','08:45']],
+juyeon:[['李柱延','오늘 교대 시간 바뀌었어요. 확인 부탁해요.','今天换班时间调整了，麻烦确认一下。','09:03'],['李柱延','그리고… 어제 말씀하신 건 고마웠어요.','还有……昨天你说的那件事，谢谢。','09:04']],
+youngjae:[['孙英宰','형수님ㅋㅋㅋ 집에 과자 있어요?','嫂子ㅋㅋㅋ 家里有零食吗？','08:51'],['孙英宰','아 그리고 저 진짜 할 말 있어요','啊对了，我真的有话要说。','08:51'],['孙英宰','형수님, 문 좀 열어 봐요. 저 형이에요.','嫂子，开门，我是我哥。','23:48']],
+younghoon:[['金泳勋','시간 괜찮을 때 잠깐 얘기할 수 있을까?','你方便的时候，可以抽空聊一下吗？','08:57'],['金泳勋','메시지로 설명하기엔 조금 복잡해.','用消息解释有点复杂。','08:59']],
+sunwoo:[['金善旴','누나, 이거 보면 저 생각날 것 같은데요ㅋㅋ','怒那，看到这个应该会想起我吧ㅋㅋ','08:49'],['金善旴','장난도 치지만, 진짜 만나고 싶은 것도 맞아요.','我会开玩笑，但我也是真的想和你见面。','08:50']]
+};
+let state, customChats={};
+function fresh(){return {tab:'story',scene:0,time:'08:42',day:31,chapter:1,stats:{independence:52,trust:48,danger:12,family:28},people:peopleBase.map(p=>({...p})),logs:[],chat:'hyunjae',toast:''}}
+function person(id){return state.people.find(p=>p.id===id)}
+function clamp(n){return Math.max(0,Math.min(100,n))}
+function addLog(t){if(t)state.logs.unshift({t,day:state.day,time:state.time});state.logs=state.logs.slice(0,50)}
+function applyFx(fx={}){Object.entries(fx).forEach(([k,v])=>{if(k in state.stats)state.stats[k]=clamp(state.stats[k]+v);else if(person(k))person(k).v=clamp(person(k).v+v)})}
+function advance(){let [h,m]=state.time.split(':').map(Number);m+=7;h=(h+Math.floor(m/60))%24;m%=60;state.time=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')}
+function gotoScene(n){advance();state.scene=Math.max(0,Math.min(scenes.length-1,n));state.chapter=state.scene>=20?3:state.scene>=8?2:1;state.tab='story';render()}
+function renderScene(){let sc=scenes[state.scene];return `<section class="scene"><div class="tag">${sc.place}</div><h2>${sc.title}</h2><p>${sc.text}</p>${sc.kr?`<div class="kr">${esc(sc.kr).replace(/\\n/g,'<br>')}</div><p class="zh">${esc(sc.zh).replace(/\\n/g,'<br>')}</p>`:''}</section><div class="muted" style="font-size:11px;margin-bottom:8px">你准备怎么做？</div>${sc.choices.map((c,i)=>`<button class="choice" data-choice="${i}"><b>${c[0]}</b><span>${c[1]}</span></button>`).join('')}`}
+function esc(v){return String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function renderChat(){let p=person(state.chat),arr=[...(defaultChats[state.chat]||[]),...(customChats[state.chat]||[])];return `<div class="line" style="align-items:center;border:0"><div class="avatar" style="background:${p.color}">${p.avatar}</div><div><b>${p.name}</b><div class="muted" style="font-size:11px">${p.kr} · ${p.role}</div></div></div><div class="muted" style="font-size:11px;text-align:center;margin:10px">KakaoTalk · 最近消息</div>${arr.map(m=>`<div class="bubble">${esc(m[1])}<small>${esc(m[0])} · ${esc(m[3])}</small><div class="translation">${esc(m[2])}</div></div>`).join('')}<div class="contacts">${state.people.map(q=>`<button class="smallbtn" data-contact="${q.id}" style="${state.chat===q.id?'background:#eadbd2;font-weight:700':''}">${q.name}</button>`).join('')}</div><div class="notice">选择剧情中的聊天选项来推进对话。此处展示联系人消息；不会替主控发送任何未输入的消息。</div><button class="choice" data-goto="story"><b>返回剧情</b><span>继续当前事件</span></button>`}
+function renderPeople(){return `<div class="tag">RELATIONSHIP STATUS</div><h2 style="font-size:18px;margin:7px 0 2px">人物关系</h2><p class="muted" style="font-size:12px;line-height:1.7">好感度不是忠诚度，也不能直接证明任何人的真实想法。</p>${state.people.map(p=>`<div class="line"><div class="avatar" style="background:${p.color}">${p.avatar}</div><div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:8px"><b style="font-size:13px">${p.name}</b><span class="muted" style="font-size:11px">${p.v}/100</span></div><div class="muted" style="font-size:11px">${p.role}</div><div class="bar"><div class="fill" style="width:${p.v}%"></div></div><div style="font-size:12px;line-height:1.6;margin-top:7px;color:#655852">${p.desc}</div></div></div>`).join('')}<section class="scene" style="margin-top:15px"><div class="tag">PUBLIC STATUS</div>${[['主控独立性',state.stats.independence],['婚姻信任',state.stats.trust],['危险察觉度',state.stats.danger],['家族警觉度',state.stats.family]].map(([n,v])=>`<div style="margin-top:12px"><div style="display:flex;justify-content:space-between;font-size:12px"><span>${n}</span><b>${v}/100</b></div><div class="bar"><div class="fill" style="width:${v}%"></div></div></div>`).join('')}</section><button class="choice" data-goto="story"><b>回到剧情</b></button>`}
+function renderSave(){let txt=`《富家大小姐的危险婚姻》存档\\n婚后第${state.day}天｜${state.time}｜事件：${scenes[state.scene].title}\\n属性：独立性${state.stats.independence}，婚姻信任${state.stats.trust}，危险察觉度${state.stats.danger}，家族警觉度${state.stats.family}\\n人物关系：${state.people.map(p=>p.name+' '+p.v+'/100').join('；')}\\n事件记录：\\n${state.logs.map(x=>`第${x.day}天 ${x.time} ${x.t}`).join('\\n')}\\n注意：未列出的剧情秘密仍未证实。`;return `<div class="tag">JOURNAL & SAVE</div><h2 style="font-size:18px;margin:7px 0">事件记录</h2><p class="muted" style="font-size:12px;line-height:1.7">游戏进度在当前页面运行期间保留。可复制存档文本到备忘录，方便手动保存。</p><button class="choice" id="make-save"><b>生成可复制的存档文本</b><span>整理当前进度、关系数值和事件记录</span></button><div id="save-area"></div><h3 style="font-size:13px;margin:18px 0 6px">最近发生的事件</h3>${state.logs.length?state.logs.map(x=>`<div class="log"><span class="muted">第${x.day}天 · ${x.time}</span><br>${esc(x.t)}</div>`).join(''):'<div class="notice">目前还没有事件记录。选择剧情选项后，这里会记录重要变化。</div>'}<button class="choice" data-goto="story"><b>返回剧情</b></button>`}
+function render(){document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===state.tab));$('#day-label').textContent=`婚后 · 第 ${state.day} 天`;$('#chapter-tag').textContent='CH. '+String(state.chapter).padStart(2,'0');$('#clock').textContent=state.time;$('#status-text').textContent=state.toast||'你的选择将改变关系与后续事件';$('#content').innerHTML=state.tab==='story'?renderScene():state.tab==='chat'?renderChat():state.tab==='people'?renderPeople():renderSave();
+document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{let c=scenes[state.scene].choices[+b.dataset.choice];applyFx(c[3]);addLog(c[5]);if(c[4])state.chat=c[4];if(c[0]==='查看人物关系'){state.tab='people';render();return}if(c[0]==='查看存档与事件记录'){state.tab='save';render();return}gotoScene(c[2])}));
+document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click',()=>{state.chat=b.dataset.contact;state.tab='chat';render()}));document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.goto;render()}));
+const make=$('#make-save');if(make)make.addEventListener('click',()=>{$('#save-area').innerHTML=`<textarea id="save-text" readonly>${txtSafe()}</textarea><button class="choice" id="select-save"><b>选中存档文本</b><span>然后选择复制，保存到备忘录</span></button>`;$('#select-save').addEventListener('click',()=>{$('#save-text').focus();$('#save-text').select();state.toast='已选中存档文本，请复制到备忘录保存。';$('#status-text').textContent=state.toast})});
+}
+function txtSafe(){return `《富家大小姐的危险婚姻》存档\n婚后第${state.day}天｜${state.time}｜事件：${scenes[state.scene].title}\n属性：独立性${state.stats.independence}，婚姻信任${state.stats.trust}，危险察觉度${state.stats.danger}，家族警觉度${state.stats.family}\n人物关系：${state.people.map(p=>p.name+' '+p.v+'/100').join('；')}\n事件记录：\n${state.logs.map(x=>`第${x.day}天 ${x.time} ${x.t}`).join('\n')}\n注意：未列出的剧情秘密仍未证实。`}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.tab;render()}));
+$('#restart').addEventListener('click',()=>{if(confirm('确定重新开始？本次进度与事件记录将被清空。')){state=fresh();customChats={};render()}});
+state=fresh();render();
+})();
+</script>
+</body>
+</html>
